@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <math.h>
+#include <string.h>
 #include "utils.h"
 
 void exitStatus(int code)
@@ -140,4 +141,22 @@ int isValidNum(double num)
 // testa se o numero nao é nan ou inf
 {
 	return !(isnan(num) || isinf(num));
+}
+
+string_t markerName(string_t baseName, int n)
+{
+  string_t mark = (string_t) malloc( (strlen(baseName)+1) + (log10(n)+1) + 1 );
+
+  sprintf(mark, "%s_%u", baseName,n);
+
+  // printf("*** %s\n", mark);
+
+  return mark;
+
+}
+
+int isPot2(int n)
+{
+  int k;
+  return (k = log2(n)) == log2(n) ;
 }

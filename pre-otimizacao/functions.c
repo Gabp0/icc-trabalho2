@@ -111,7 +111,7 @@ void printMethod(FUNCTION *func, char *output)
 
     // cabeçalho
     fprintf(output_file, "%d\n#", func->var_num); //, func->expression);
-    fprintf(output_file, "Iteração \t| Newton Padrão \t| Newton Modificado \t| Newton Inexato\n");
+    fprintf(output_file, "Iteração \t| Newton Padrão \t| Newton Inexato\n");
 
     int z = max(func->n_p->it_num, func->n_m->it_num, func->n_i->it_num); // encontra o metodo com o maior numero de iteracoes
     for (int i = 0; i < z; i++)
@@ -124,11 +124,6 @@ void printMethod(FUNCTION *func, char *output)
         else
             fprintf(output_file, "\t\t\t| ");
 
-        if (func->n_m->it_num > i)
-            fprintf(output_file, "%1.14e\t| ", func->n_m->f_k[i]); // newton modificado
-        else
-            fprintf(output_file, "\t\t\t| ");
-
         if (func->n_i->it_num > i)
             fprintf(output_file, "%1.14e\t \n", func->n_i->f_k[i]); // newton inexato
         else
@@ -136,9 +131,9 @@ void printMethod(FUNCTION *func, char *output)
     }
 
     // imprimir os tempos
-    fprintf(output_file, "Tempo total \t| %1.14e\t| %1.14e\t| %1.14e\n", func->n_p->timeFull, func->n_m->timeFull, func->n_i->timeFull);
-    fprintf(output_file, "Tempo derivadas | %1.14e\t| %1.14e\t| %1.14e\n", func->n_p->timeDer, func->n_m->timeDer, func->n_i->timeFull);
-    fprintf(output_file, "Tempo SL \t| %1.14e\t| %1.14e\t| %1.14e\n#\n\n", func->n_p->timeSL, func->n_m->timeSL, func->n_i->timeFull);
+    fprintf(output_file, "Tempo total \t| %1.14e\t| %1.14e\n", func->n_p->timeFull, func->n_i->timeFull);
+    fprintf(output_file, "Tempo derivadas | %1.14e\t| %1.14e\n", func->n_p->timeDer, func->n_i->timeFull);
+    fprintf(output_file, "Tempo SL \t| %1.14e\t| %1.14e\n#\n\n", func->n_p->timeSL,  func->n_i->timeFull);
 
     if (output)
         fclose(output_file);
@@ -155,7 +150,7 @@ void deleteFunction(FUNCTION *func)
     // evaluator_destroy(func->evaluator);
     // free(func->expression);
     _deleteResult(func->n_i);
-    _deleteResult(func->n_m);
+    //_deleteResult(func->n_m);
     _deleteResult(func->n_p);
     free(func);
 }

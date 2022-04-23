@@ -18,10 +18,24 @@
 #define FOPEN_ERR 106    // falha ao abrir arquivo
 #define ZERO_DIV 107     // divisao por zero
 
+// SIMD alignment macros
+#define ALIGN_64 __attribute__((aligned(64)))
+#define ALIGN_32 __attribute__((aligned(32)))
+#define ALIGN_16 __attribute__((aligned(16)))
+
+
+typedef double real_t;
+typedef double rtime_t;
+typedef char * string_t;
+
 double timestamp(void);
 void prnVetorFloat(float *x, int n);
 void prnVetorDouble(double *x, int n);
 void prnVetorLongDouble(long double *x, int n);
+
+string_t markerName(string_t baseName, int n);
+int isPot2 (int n);
+
 
 double *copyDoubleArray(double *a, int size); // copia array de double _a_ e retorna um ponteiro para copia
 int max(int a, int b, int c);                 // retorna o maior de tres inteiros

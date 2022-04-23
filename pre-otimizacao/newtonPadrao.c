@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <matheval.h>
+#include <likwid.h>
 
 NEWTON_P *initNewtonP(FUNCTION *func)
 // aloca memoria para a struct NEWTON_P
@@ -70,28 +71,37 @@ void NewtonPadrao(FUNCTION *func)
     // Gradiente(func, np->gradiente);              // gera as funcoes do vetor gradiente
     // Hessiana(func, np->gradiente, np->hessiana); // gera as funcoes da matriz hessiana
     func->n_p->timeDer += timestamp();
+    
+    string_t *markerHessiana = markerName("NewtonPadrao_Hessiana",func->var_num);
+    string_t *markerGradiente = markerName("NewtonPadrao_Gradiente",func->var_num);
+    string_t *markerSL = markerName("NewtonPadrao_SL",func->var_num);
+
 
     for (int k = 0; k <= func->it_num; k++) // testa numero de iteracoes
     {
         // np->aprox_newtonP[k] = evaluator_evaluate(func->evaluator, func->var_num, func->names, np->X_i); // f(X_i)
         np->aprox_newtonP[k] = rosenbrock(np->X_i, func->var_num); // f(X_i)
 
+        LIKWID_MARKER_START(markerGradiente);
         for (int i = 0; i < func->var_num; i++) // gradiente f(X_i)
-            // np->syst->b[i] = evaluator_evaluate(np->gradiente[i], func->var_num, func->names, np->X_i) * -1; // oposto resultado do gradiente para o calculo do sistema linear
             np->syst->b[i] = rosenbrock_dx(i, np->X_i, func->var_num) * -1; // oposto resultado do gradiente para o calculo do sistema linear
+        LIKWID_MARKER_STOP(markerGradiente);
 
         func->n_p->it_num++; // numero de iteracoes utilizadas no metodo
 
         if (norma(np->syst->b, func->var_num) < func->t_ep) // testa || gradiente de f(X_i) || < eps
             break;
 
+        LIKWID_MARKER_START(markerHessiana);
         for (int i = 0; i < func->var_num; i++)
             for (int j = 0; j < func->var_num; j++) // calcula a hessiana de X_i
-                // np->syst->A[i][j] = evaluator_evaluate(np->hessiana[i][j], func->var_num, func->names, np->X_i);
                 np->syst->A[i][j] = rosenbrock_dxdy(i, j, np->X_i, func->var_num);
+        LIKWID_MARKER_STOP(markerHessiana);
 
         func->n_p->timeSL -= timestamp();
+        LIKWID_MARKER_START(markerSL);
         gaussianElimination(np->syst); // resolve o sistema linear utilizando a eliminacao de guass
+        LIKWID_MARKER_STOP(markerSL);
         func->n_p->timeSL += timestamp();
 
         for (int i = 0; i < func->var_num; i++)

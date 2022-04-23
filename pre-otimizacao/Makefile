@@ -4,7 +4,7 @@
 # Makefile
 
 CC = gcc
-CFLAGS = --std=c99 -Wall 
+CFLAGS = --std=c99 -Wall -O3 -mavx -march=native
 CPPFLAGS = -I/usr/local/include 
 LDFLAGS = -L/usr/local/lib 
 LDLIBS = -lm -lmatheval

@@ -86,6 +86,23 @@ double *copyDoubleArray(double *a, int size)
 	return new;
 }
 
+double **initDoubleMatrix(int size)
+// aloca memoria para uma matriz de double de tamanho _size_ * _size_ e retorna o ponteiro para ela
+{
+	double **A = malloc(sizeof(double *) * size);
+	if (!A)
+		exitStatus(MEM_ALOC);
+
+	for (int i = 0; i < size; i++)
+	{
+		A[i] = malloc(sizeof(double) * size);
+		if (!A[i])
+			exitStatus(MEM_ALOC);
+	}
+
+	return A;
+}
+
 char *getArgs(int argc, char **argv)
 // separa os argumentos passados pela linha de comando
 {
@@ -128,17 +145,18 @@ int isValidNum(double num)
 
 string_t markerName(string_t baseName, int n)
 {
-	string_t mark = (string_t)malloc((strlen(baseName) + 1) + (log10(n) + 1) + 1);
+  string_t mark = (string_t) malloc( (strlen(baseName)+1) + (log10(n)+1) + 1 );
 
-	sprintf(mark, "%s_%u", baseName, n);
+  sprintf(mark, "%s_%u", baseName,n);
 
-	// printf("*** %s\n", mark);
+  // printf("*** %s\n", mark);
 
-	return mark;
+  return mark;
+
 }
 
 int isPot2(int n)
 {
-	int k;
-	return (k = log2(n)) == log2(n);
+  int k;
+  return (k = log2(n)) == log2(n) ;
 }

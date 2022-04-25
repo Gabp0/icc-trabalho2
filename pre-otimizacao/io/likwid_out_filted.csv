@@ -1,0 +1,120 @@
+TABLE,Region NewtonPadrao_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],2.3601,
+TABLE,Region NewtonPadrao_Gradiente_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Gradiente_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],262.5224,
+TABLE,Region NewtonPadrao_Hessiana_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Hessiana_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],85.9786,
+TABLE,Region NewtonPadrao_SL_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_SL_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],578.9329,
+TABLE,Region NewtonInexato_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],14.0234,
+TABLE,Region NewtonInexato_Gradiente_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Gradiente_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],410.3230,
+TABLE,Region NewtonInexato_Hessiana_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Hessiana_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],83.7775,
+TABLE,Region NewtonInexato_SL_10,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_SL_10,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],535.2932,
+TABLE,Region NewtonPadrao_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],56.6706,
+TABLE,Region NewtonPadrao_Gradiente_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Gradiente_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1015.7843,
+TABLE,Region NewtonPadrao_Hessiana_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Hessiana_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],43.4828,
+TABLE,Region NewtonPadrao_SL_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_SL_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1959.2402,
+TABLE,Region NewtonInexato_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],131.4916,
+TABLE,Region NewtonInexato_Gradiente_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Gradiente_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],980.4769,
+TABLE,Region NewtonInexato_Hessiana_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Hessiana_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],43.9698,
+TABLE,Region NewtonInexato_SL_32,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_SL_32,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],923.0760,
+TABLE,Region NewtonPadrao_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],191.0762,
+TABLE,Region NewtonPadrao_Gradiente_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Gradiente_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1224.8081,
+TABLE,Region NewtonPadrao_Hessiana_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Hessiana_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],29.5662,
+TABLE,Region NewtonPadrao_SL_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_SL_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],2293.1594,
+TABLE,Region NewtonInexato_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],229.9856,
+TABLE,Region NewtonInexato_Gradiente_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Gradiente_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1128.9556,
+TABLE,Region NewtonInexato_Hessiana_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Hessiana_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],28.3424,
+TABLE,Region NewtonInexato_SL_50,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_SL_50,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],966.5469,
+TABLE,Region NewtonPadrao_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],300.7640,
+TABLE,Region NewtonPadrao_Gradiente_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Gradiente_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1324.7814,
+TABLE,Region NewtonPadrao_Hessiana_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Hessiana_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],22.2527,
+TABLE,Region NewtonPadrao_SL_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_SL_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],2246.2922,
+TABLE,Region NewtonInexato_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],345.8309,
+TABLE,Region NewtonInexato_Gradiente_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Gradiente_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1390.7756,
+TABLE,Region NewtonInexato_Hessiana_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Hessiana_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],22.9667,
+TABLE,Region NewtonInexato_SL_64,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_SL_64,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1035.7155,
+TABLE,Region NewtonPadrao_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],850.5307,
+TABLE,Region NewtonPadrao_Gradiente_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Gradiente_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1589.4544,
+TABLE,Region NewtonPadrao_Hessiana_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_Hessiana_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],14.6286,
+TABLE,Region NewtonPadrao_SL_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonPadrao_SL_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],2598.6030,
+TABLE,Region NewtonInexato_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],599.4062,
+TABLE,Region NewtonInexato_Gradiente_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Gradiente_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1663.9869,
+TABLE,Region NewtonInexato_Hessiana_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_Hessiana_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],15.4520,
+TABLE,Region NewtonInexato_SL_100,Group 1 Raw,FLOPS_DP,4
+TABLE,Region NewtonInexato_SL_100,Group 1 Metric,FLOPS_DP,6
+DP [MFLOP/s],1182.6797,

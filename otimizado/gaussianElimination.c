@@ -85,16 +85,7 @@ void _retrossubs(LINEAR_SYST *restrict syst)
 // encontra os valores de X substituindo a partir da ultima linha do sl
 {
 	// unroll & jam do loop
-	// for (int i = syst->size - 1; i >= 0; --i)
-	//    {
-	//      syst->X[i] = syst->b[i];
-	//      for (int j = i + 1; j < syst->size; j++)
-	//        syst->X[i] -= syst->A[i][j] * syst->X[j];
-	//      syst->X[i] /= syst->A[i][i];
-
-	int size_strd = (syst->size - (syst->size % 4));
-
-	for (int i = (syst->size - 1); i > size_strd - 1; --i) // residuo
+	for (int i = syst->size - 1; i >= 0; --i)
 	{
 		syst->X[i] = syst->b[i];
 		for (int j = i + 1; j < syst->size; j++)
@@ -102,24 +93,34 @@ void _retrossubs(LINEAR_SYST *restrict syst)
 		syst->X[i] /= syst->A[i][i];
 	}
 
-	for (int i = size_strd - 1; i >= 0; i -= 4) // unroll e jam com 4 de stride
-	{
-		syst->X[i] = syst->b[i];
-		syst->X[i - 1] = syst->b[i - 1];
-		syst->X[i - 2] = syst->b[i - 2];
-		syst->X[i - 3] = syst->b[i - 3];
-		for (int j = i + 1; j < syst->size; j++)
-		{
-			syst->X[i] -= syst->A[i][j] * syst->X[j];
-			syst->X[i - 1] -= syst->A[i - 1][j] * syst->X[j];
-			syst->X[i - 2] -= syst->A[i - 2][j] * syst->X[j];
-			syst->X[i - 3] -= syst->A[i - 3][j] * syst->X[j];
-		}
-		syst->X[i] /= syst->A[i][i];
-		syst->X[i - 1] /= syst->A[i - 1][i - 1];
-		syst->X[i - 2] /= syst->A[i - 2][i - 2];
-		syst->X[i - 3] /= syst->A[i - 3][i - 3];
-	}
+	// int size_strd = (syst->size - (syst->size % 4));
+
+	// for (int i = (syst->size - 1); i > size_strd - 1; --i) // residuo
+	// {
+	// 	syst->X[i] = syst->b[i];
+	// 	for (int j = i + 1; j < syst->size; j++)
+	// 		syst->X[i] -= syst->A[i][j] * syst->X[j];
+	// 	syst->X[i] /= syst->A[i][i];
+	// }
+
+	// for (int i = size_strd - 1; i >= 0; i -= 4) // unroll e jam com 4 de stride
+	// {
+	// 	syst->X[i] = syst->b[i];
+	// 	syst->X[i - 1] = syst->b[i - 1];
+	// 	syst->X[i - 2] = syst->b[i - 2];
+	// 	syst->X[i - 3] = syst->b[i - 3];
+	// 	for (int j = i + 1; j < syst->size; j++)
+	// 	{
+	// 		syst->X[i] -= syst->A[i][j] * syst->X[j];
+	// 		syst->X[i - 1] -= syst->A[i - 1][j] * syst->X[j];
+	// 		syst->X[i - 2] -= syst->A[i - 2][j] * syst->X[j];
+	// 		syst->X[i - 3] -= syst->A[i - 3][j] * syst->X[j];
+	// 	}
+	// 	syst->X[i] /= syst->A[i][i];
+	// 	syst->X[i - 1] /= syst->A[i - 1][i - 1];
+	// 	syst->X[i - 2] /= syst->A[i - 2][i - 2];
+	// 	syst->X[i - 3] /= syst->A[i - 3][i - 3];
+	// }
 }
 
 void _triang(LINEAR_SYST *restrict syst)

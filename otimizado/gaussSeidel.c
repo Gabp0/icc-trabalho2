@@ -57,7 +57,8 @@ void gaussSeidel(LINEAR_SYST_GS *restrict syst)
         syst->X[i] = (syst->b[i] - soma) / syst->A[i_m + i];
     }
 
-    for (int k = 1; (k < IT_MAX) && (fabs(norma(syst->X, syst->size) - norma(syst->Xk_m1, syst->size)) < TOL); k++) // numero de iteracoes
+    int k = 1;
+    do // numero de iteracoes
     {
 
         for (int i = 0; i < syst->size; i++)
@@ -72,7 +73,8 @@ void gaussSeidel(LINEAR_SYST_GS *restrict syst)
             syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]
             syst->X[i] = (syst->b[i] - soma) / syst->A[i_m + i];
         }
-    }
+        k++;
+    } while ((k < IT_MAX) && (fabs(norma(syst->X, syst->size) - norma(syst->Xk_m1, syst->size)) > TOL));
 
     return;
 }

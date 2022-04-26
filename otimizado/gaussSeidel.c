@@ -34,7 +34,7 @@ LINEAR_SYST_GS *initLSGS(int size)
     return new;
 }
 
-void gaussSeidel(LINEAR_SYST_GS *syst)
+void gaussSeidel(LINEAR_SYST_GS *restrict syst)
 // resolve o sistema linear utilizando o metodo de Gauss-Seidel
 {
     double soma;
@@ -45,15 +45,15 @@ void gaussSeidel(LINEAR_SYST_GS *syst)
         for (int i = 0; i < syst->size; i++)
         {
             soma = 0;
-            for (int j = 0; j < syst->size; j++)
-            {
-                if (i != j)
-                    soma += syst->A[i][j] * syst->X[j];
-            }
+            for (int j = 0; j < i; j++) // quebra do loop em dois eliminando o branch
+                soma += syst->A[i][j] * syst->X[j];
+            for (int j = i + 1; j < syst->size; j++)
+                soma += syst->A[i][j] * syst->X[j];
+
             syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]
             syst->X[i] = (syst->b[i] - soma) / syst->A[i][i];
-            if (!isValidNum(syst->X[i]))
-                exitStatus(ZERO_DIV);
+            // if (!isValidNum(syst->X[i]))
+            //     exitStatus(ZERO_DIV);
         }
         if (k > 0)
             if (fabs(norma(syst->X, syst->size) - norma(syst->Xk_m1, syst->size)) < TOL)
@@ -63,14 +63,12 @@ void gaussSeidel(LINEAR_SYST_GS *syst)
     return;
 }
 
-void deleteLSGS(LINEAR_SYST_GS *syst)
+void deleteLSGS(LINEAR_SYST_GS *restrict syst)
 // libera memoria utilizada pelo sistema linear _syst_
 {
     if (!syst)
         exitStatus(INV_POINTER);
 
-    for (int i = 0; i < syst->size; i++)
-        free(syst->A[i]);
     free(syst->A);
     free(syst->b);
     free(syst->X);

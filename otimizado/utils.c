@@ -86,19 +86,29 @@ double *copyDoubleArray(double *a, int size)
 	return new;
 }
 
+inline int pad(int n)
+// se n e potencia de 2, retorna n + 1
+// usado para evitar cache trashing
+{
+	if (isPot2(n))
+		return n + 1;
+	return n;
+}
+
 double **initDoubleMatrix(int size)
 // aloca memoria para uma matriz de double de tamanho _size_ * _size_ e retorna o ponteiro para ela
 {
-	double **A = malloc(sizeof(double *) * size);
+	double **A = malloc(sizeof(double *) * pad(size));
 	if (!A)
 		exitStatus(MEM_ALOC);
 
-	for (int i = 0; i < size; i++)
-	{
-		A[i] = malloc(sizeof(double) * size);
-		if (!A[i])
-			exitStatus(MEM_ALOC);
-	}
+	A[0] = malloc(sizeof(double) * pad(size) * pad(size));
+	if (!A[0])
+		exitStatus(MEM_ALOC);
+
+	// ajusta os demais ponteiros de linhas (i > 0)
+	for (int i = 1; i < size; i++)
+		A[i] = A[0] + i * size;
 
 	return A;
 }
@@ -121,14 +131,14 @@ char *getArgs(int argc, char **argv)
 	return NULL;
 }
 
-int max(int a, int b, int c)
+inline int max(int a, int b, int c)
 // maximo entre tres int
 {
 	int aux = a > b ? a : b;
 	return aux > c ? aux : c;
 }
 
-double norma(double *array, int size)
+inline double norma(double *array, int size)
 // norma euclidiana do vetor
 {
 	double soma = 0;
@@ -137,7 +147,7 @@ double norma(double *array, int size)
 	return sqrt(soma);
 }
 
-int isValidNum(double num)
+inline int isValidNum(double num)
 // testa se o numero nao é nan ou inf
 {
 	return !(isnan(num) || isinf(num));
@@ -145,18 +155,15 @@ int isValidNum(double num)
 
 string_t markerName(string_t baseName, int n)
 {
-  string_t mark = (string_t) malloc( (strlen(baseName)+1) + (log10(n)+1) + 1 );
+	string_t mark = (string_t)malloc((strlen(baseName) + 1) + (log10(n) + 1) + 1);
 
-  sprintf(mark, "%s_%u", baseName,n);
+	sprintf(mark, "%s_%u", baseName, n);
 
-  // printf("*** %s\n", mark);
-
-  return mark;
-
+	return mark;
 }
 
-int isPot2(int n)
+inline int isPot2(int n)
 {
-  int k;
-  return (k = log2(n)) == log2(n) ;
+	int k;
+	return (k = log2(n)) == log2(n);
 }

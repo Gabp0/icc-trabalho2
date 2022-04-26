@@ -19,8 +19,8 @@ typedef struct linear_syst_gs
     int size;      // tamanho
 } LINEAR_SYST_GS;
 
-LINEAR_SYST_GS *initLSGS(int size);     // Aloca memoria para um sistema linear de tamanho _size_ para resolucao por Gauss-Seidel
-void gaussSeidel(LINEAR_SYST_GS *syst); // Resolve o sistema linear _syst_ utilizando o metodo de Gauss-Seidel
-void deleteLSGS(LINEAR_SYST_GS *syst);  // Libera memoria utilizada pelo sistema linear _syst_
+LINEAR_SYST_GS *initLSGS(int size);              // Aloca memoria para um sistema linear de tamanho _size_ para resolucao por Gauss-Seidel
+void gaussSeidel(LINEAR_SYST_GS *restrict syst); // Resolve o sistema linear _syst_ utilizando o metodo de Gauss-Seidel
+void deleteLSGS(LINEAR_SYST_GS *restrict syst);  // Libera memoria utilizada pelo sistema linear _syst_
 
 #endif

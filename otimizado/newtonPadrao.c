@@ -13,7 +13,7 @@
 #include <matheval.h>
 #include <likwid.h>
 
-NEWTON_P *initNewtonP(FUNCTION *func)
+NEWTON_P *initNewtonP(FUNCTION *restrict func)
 // aloca memoria para a struct NEWTON_P
 {
     NEWTON_P *new = malloc(sizeof(NEWTON_P));
@@ -23,14 +23,15 @@ NEWTON_P *initNewtonP(FUNCTION *func)
     new->syst = initLS(func->var_num);
     new->X_i = copyDoubleArray(func->initial_aps, func->var_num);
     new->n = func->var_num;
-    new->aprox_newtonP = calloc(sizeof(double), func->it_num + 1);
+    new->aprox_newtonP = malloc(sizeof(double) * pad(func->it_num + 1));
+    memset(new->aprox_newtonP, 0, func->it_num + 1);
     if (!new->aprox_newtonP)
         exitStatus(MEM_ALOC);
 
     return new;
 }
 
-void _deleteNewtonP(NEWTON_P *np)
+void _deleteNewtonP(NEWTON_P *restrict np)
 // libera memoria utilizada pela struct _np_
 {
     free(np->aprox_newtonP);
@@ -41,7 +42,7 @@ void _deleteNewtonP(NEWTON_P *np)
     free(np);
 }
 
-void NewtonPadrao(FUNCTION *func)
+void NewtonPadrao(FUNCTION *restrict func)
 // encontra as raizes da funcao _func_ utilizando o metodo de newton padrao
 {
     func->n_p->timeFull -= timestamp();

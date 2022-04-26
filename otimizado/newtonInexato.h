@@ -20,6 +20,6 @@ typedef struct newton_inexato
     double eps;            // tolerancia epsilon
 } NEWTON_I;
 
-void NewtonInexato(FUNCTION *func); // Encontra as raizes da funcao _func_ utilizando o metodo de newton inexato
+void NewtonInexato(FUNCTION *restrict func); // Encontra as raizes da funcao _func_ utilizando o metodo de newton inexato
 
 #endif

@@ -23,10 +23,9 @@
 #define ALIGN_32 __attribute__((aligned(32)))
 #define ALIGN_16 __attribute__((aligned(16)))
 
-
 typedef double real_t;
 typedef double rtime_t;
-typedef char * string_t;
+typedef char *string_t;
 
 double timestamp(void);
 void prnVetorFloat(float *x, int n);
@@ -34,8 +33,7 @@ void prnVetorDouble(double *x, int n);
 void prnVetorLongDouble(long double *x, int n);
 
 string_t markerName(string_t baseName, int n);
-int isPot2 (int n);
-
+int isPot2(int n);
 
 double *copyDoubleArray(double *a, int size); // copia array de double _a_ e retorna um ponteiro para copia
 int max(int a, int b, int c);                 // retorna o maior de tres inteiros
@@ -44,5 +42,6 @@ double **initDoubleMatrix(int size);          // aloca uma matriz de double _siz
 void exitStatus(int code);                    // encerra o programa com status de saida diferente de 0
 double norma(double *array, int size);        // retorna norma euclidiana do vetor _array_ de tamanho _size_
 int isValidNum(double num);                   // testa se o numero nao e "nan" e nem "inf"
+int pad(int n);                               // se n e potencia de 2, retorna n + 1; usado para evitar cache trashing
 
 #endif

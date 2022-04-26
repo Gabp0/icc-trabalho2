@@ -12,7 +12,7 @@
 #include <math.h>
 #include <likwid.h>
 
-NEWTON_I *_initNewtonI(FUNCTION *func)
+NEWTON_I *_initNewtonI(FUNCTION *restrict func)
 // aloca memoria para a struct usada pelo metodo de newton inexato
 {
     NEWTON_I *new = malloc(sizeof(NEWTON_I));
@@ -29,7 +29,7 @@ NEWTON_I *_initNewtonI(FUNCTION *func)
     return new;
 }
 
-void _deleteNewtonI(NEWTON_I *ni)
+void _deleteNewtonI(NEWTON_I *restrict ni)
 // libera memoria utilizada pela struct do newton inexato
 {
     free(ni->aprox_newtonI);
@@ -39,7 +39,7 @@ void _deleteNewtonI(NEWTON_I *ni)
     free(ni);
 }
 
-void NewtonInexato(FUNCTION *func)
+void NewtonInexato(FUNCTION *restrict func)
 // encontra as raizes da funcao utilizando o metodo de newton inexato
 {
     func->n_i->timeFull -= timestamp();

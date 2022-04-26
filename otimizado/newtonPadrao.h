@@ -20,6 +20,6 @@ typedef struct newton_padrao
     double eps;            // tolerancia epsilon
 } NEWTON_P;
 
-void NewtonPadrao(FUNCTION *func); // Encontra as raizes da funcao _func_ utilizando o metodo de newton padrao
+void NewtonPadrao(FUNCTION *restrict func); // Encontra as raizes da funcao _func_ utilizando o metodo de newton padrao
 
 #endif

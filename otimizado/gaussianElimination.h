@@ -15,8 +15,8 @@ typedef struct linear_syst
     int size;   // tamanho
 } LINEAR_SYST;
 
-LINEAR_SYST *initLS(int size);               // Aloca memoria para um sistema linear de tamanho _size_ e retorna um ponteiro para ele
-void deleteLS(LINEAR_SYST *syst);            // Libera memoria utilizada pelo sistema linear _syst_
-void gaussianElimination(LINEAR_SYST *syst); // Resolve o sistema linear _syst_ utilizando o metodo da eliminacao de Gauss
+LINEAR_SYST *initLS(int size);                        // Aloca memoria para um sistema linear de tamanho _size_ e retorna um ponteiro para ele
+void deleteLS(LINEAR_SYST *restrict syst);            // Libera memoria utilizada pelo sistema linear _syst_
+void gaussianElimination(LINEAR_SYST *restrict syst); // Resolve o sistema linear _syst_ utilizando o metodo da eliminacao de Gauss
 
 #endif

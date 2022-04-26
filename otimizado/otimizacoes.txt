@@ -1,0 +1,4 @@
+* forma de alocacao de matriz - funcao "double **initDoubleMatrix(int size)"
+* uso de restrict nos ponteiros
+* remocao de condicional dentro de loop
+* padding na alocao de memoria para evitar cache trashing

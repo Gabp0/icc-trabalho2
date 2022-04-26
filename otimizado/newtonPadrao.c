@@ -34,6 +34,7 @@ NEWTON_P *initNewtonP(FUNCTION *restrict func)
 void _deleteNewtonP(NEWTON_P *restrict np)
 // libera memoria utilizada pela struct _np_
 {
+
     free(np->aprox_newtonP);
 
     deleteLS(np->syst);

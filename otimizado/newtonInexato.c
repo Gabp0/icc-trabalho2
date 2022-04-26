@@ -32,6 +32,7 @@ NEWTON_I *_initNewtonI(FUNCTION *restrict func)
 void _deleteNewtonI(NEWTON_I *restrict ni)
 // libera memoria utilizada pela struct do newton inexato
 {
+
     free(ni->aprox_newtonI);
     deleteLSGS(ni->syst);
 
@@ -69,10 +70,14 @@ void NewtonInexato(FUNCTION *restrict func)
         if (norma(ni->syst->b, func->var_num) < func->t_ep) // testa || gradiente de f(X_i) || < eps
             break;
 
+        int i_m;
         LIKWID_MARKER_START(markerHessiana);
         for (int i = 0; i < func->var_num; i++) // calcula a hessiana de X_i
+        {
+            i_m = i * ni->syst->size;
             for (int j = 0; j < func->var_num; j++)
-                ni->syst->A[i][j] = rosenbrock_dxdy(i, j, ni->X_i, func->var_num);
+                ni->syst->A[i_m + j] = rosenbrock_dxdy(i, j, ni->X_i, func->var_num);
+        }
         LIKWID_MARKER_STOP(markerHessiana);
 
         for (int i = 0; i < func->var_num; i++)
@@ -94,7 +99,7 @@ void NewtonInexato(FUNCTION *restrict func)
         }
     }
 
-    func->n_i->f_k = copyDoubleArray(ni->aprox_newtonI, func->n_i->it_num); // resultado do sistema
+        func->n_i->f_k = copyDoubleArray(ni->aprox_newtonI, func->n_i->it_num); // resultado do sistema
     _deleteNewtonI(ni);
     func->n_i->timeFull += timestamp();
 }

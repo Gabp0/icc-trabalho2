@@ -17,17 +17,21 @@ LINEAR_SYST_GS *initLSGS(int size)
         exitStatus(MEM_ALOC);
 
     new->size = size;
-    new->A = initDoubleMatrix(size);
+    int p_size = pad(size); // padding no tamanho para evitar cache trashing
 
-    new->b = malloc(sizeof(double) * size);
+    new->A = malloc(sizeof(double) * p_size * p_size);
+    if (!new->A)
+        exitStatus(MEM_ALOC);
+
+    new->b = malloc(sizeof(double) * p_size);
     if (!new->b)
         exitStatus(MEM_ALOC);
 
-    new->X = malloc(sizeof(double) * size);
+    new->X = malloc(sizeof(double) * p_size);
     if (!new->X)
         exitStatus(MEM_ALOC);
 
-    new->Xk_m1 = malloc(sizeof(double) * size);
+    new->Xk_m1 = malloc(sizeof(double) * p_size);
     if (!new->Xk_m1)
         exitStatus(MEM_ALOC);
 
@@ -38,26 +42,36 @@ void gaussSeidel(LINEAR_SYST_GS *restrict syst)
 // resolve o sistema linear utilizando o metodo de Gauss-Seidel
 {
     double soma;
+    int i_m;
 
-    for (int k = 0; k < IT_MAX; k++) // numero de iteracoes
+    for (int i = 0; i < syst->size; i++) // primeira iteracao fora do loop para remocao do if
+    {
+        i_m = i * syst->size;
+        soma = 0;
+        for (int j = 0; j < i; j++) // quebra do loop em dois eliminando o if
+            soma += syst->A[i_m + j] * syst->X[j];
+        for (int j = i + 1; j < syst->size; j++)
+            soma += syst->A[i_m + j] * syst->X[j];
+
+        syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]
+        syst->X[i] = (syst->b[i] - soma) / syst->A[i_m + i];
+    }
+
+    for (int k = 1; (k < IT_MAX) && (fabs(norma(syst->X, syst->size) - norma(syst->Xk_m1, syst->size)) < TOL); k++) // numero de iteracoes
     {
 
         for (int i = 0; i < syst->size; i++)
         {
+            i_m = i * syst->size;
             soma = 0;
-            for (int j = 0; j < i; j++) // quebra do loop em dois eliminando o branch
-                soma += syst->A[i][j] * syst->X[j];
+            for (int j = 0; j < i; j++) // quebra do loop em dois eliminando o if
+                soma += syst->A[i_m + j] * syst->X[j];
             for (int j = i + 1; j < syst->size; j++)
-                soma += syst->A[i][j] * syst->X[j];
+                soma += syst->A[i_m + j] * syst->X[j];
 
             syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]
-            syst->X[i] = (syst->b[i] - soma) / syst->A[i][i];
-            // if (!isValidNum(syst->X[i]))
-            //     exitStatus(ZERO_DIV);
+            syst->X[i] = (syst->b[i] - soma) / syst->A[i_m + i];
         }
-        if (k > 0)
-            if (fabs(norma(syst->X, syst->size) - norma(syst->Xk_m1, syst->size)) < TOL)
-                break;
     }
 
     return;

@@ -86,6 +86,22 @@ double *copyDoubleArray(double *a, int size)
 	return new;
 }
 
+double **initDoubleMatrix(int size)
+{
+	double **A = malloc(sizeof(double *) * size);
+	if (!A)
+		exitStatus(MEM_ALOC);
+
+	for (int i = 0; i < size; i++)
+	{
+		A[i] = malloc(sizeof(double) * size);
+		if (!A[i])
+			exitStatus(MEM_ALOC);
+	}
+
+	return A;
+}
+
 char *getArgs(int argc, char **argv)
 // separa os argumentos passados pela linha de comando
 {

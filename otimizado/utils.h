@@ -38,7 +38,6 @@ int isPot2(int n);
 double *copyDoubleArray(double *a, int size); // copia array de double _a_ e retorna um ponteiro para copia
 int max(int a, int b, int c);                 // retorna o maior de tres inteiros
 char *getArgs(int argc, char **argv);         // separa os argumentos da linha de comando. retorna null caso nao haja arquivo de saida
-double **initDoubleMatrix(int size);          // aloca uma matriz de double _size_ * _size_ e retorna o ponteiro para ela
 void exitStatus(int code);                    // encerra o programa com status de saida diferente de 0
 double norma(double *array, int size);        // retorna norma euclidiana do vetor _array_ de tamanho _size_
 int isValidNum(double num);                   // testa se o numero nao e "nan" e nem "inf"

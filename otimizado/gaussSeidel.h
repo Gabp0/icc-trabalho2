@@ -12,7 +12,7 @@
 typedef struct linear_syst_gs
 // struct para representacao de um sistema linear
 {
-    double **A;    // matriz de coeficientes A
+    double *A;     // matriz de coeficientes A
     double *X;     // vetor das variaveis
     double *Xk_m1; // vetor das variaveis da iteracao anterior
     double *b;     // vetor do resultado

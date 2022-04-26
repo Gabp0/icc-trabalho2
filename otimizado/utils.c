@@ -79,9 +79,10 @@ void prnVetorLongDouble(long double *v, int n)
 double *copyDoubleArray(double *a, int size)
 // aloca um array de double, copia o conteudo de _a_ e retorna o ponteiro
 {
-	double *new = malloc(sizeof(double) * size);
-	for (int i = 0; i < size; i++)
-		new[i] = a[i];
+	double *new = malloc(sizeof(double) * pad(size));
+	if (!new)
+		exitStatus(MEM_ALOC);
+	memcpy(new, a, sizeof(double) * size);
 
 	return new;
 }
@@ -93,24 +94,6 @@ inline int pad(int n)
 	if (isPot2(n))
 		return n + 1;
 	return n;
-}
-
-double **initDoubleMatrix(int size)
-// aloca memoria para uma matriz de double de tamanho _size_ * _size_ e retorna o ponteiro para ela
-{
-	double **A = malloc(sizeof(double *) * pad(size));
-	if (!A)
-		exitStatus(MEM_ALOC);
-
-	A[0] = malloc(sizeof(double) * pad(size) * pad(size));
-	if (!A[0])
-		exitStatus(MEM_ALOC);
-
-	// ajusta os demais ponteiros de linhas (i > 0)
-	for (int i = 1; i < size; i++)
-		A[i] = A[0] + i * size;
-
-	return A;
 }
 
 char *getArgs(int argc, char **argv)

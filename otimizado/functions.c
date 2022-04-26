@@ -132,8 +132,8 @@ void printMethod(FUNCTION *func, char *output)
 
     // imprimir os tempos
     fprintf(output_file, "Tempo total \t| %1.14e\t| %1.14e\n", func->n_p->timeFull, func->n_i->timeFull);
-    fprintf(output_file, "Tempo derivadas | %1.14e\t| %1.14e\n", func->n_p->timeDer, func->n_i->timeFull);
-    fprintf(output_file, "Tempo SL \t| %1.14e\t| %1.14e\n#\n\n", func->n_p->timeSL,  func->n_i->timeFull);
+    fprintf(output_file, "Tempo derivadas | %1.14e\t| %1.14e\n", func->n_p->timeDer, func->n_i->timeDer);
+    fprintf(output_file, "Tempo SL \t| %1.14e\t| %1.14e\n#\n\n", func->n_p->timeSL, func->n_i->timeSL);
 
     if (output)
         fclose(output_file);

@@ -22,9 +22,10 @@ NEWTON_I *_initNewtonI(FUNCTION *restrict func)
     new->syst = initLSGS(func->var_num);
     new->X_i = copyDoubleArray(func->initial_aps, func->var_num);
     new->n = func->var_num;
-    new->aprox_newtonI = calloc(sizeof(double), func->it_num + 1);
+    new->aprox_newtonI = malloc(sizeof(double) * pad(func->it_num + 1));
     if (!new->aprox_newtonI)
         exitStatus(MEM_ALOC);
+    memset(new->aprox_newtonI, 0, sizeof(double) * pad(func->it_num + 1));
 
     return new;
 }
@@ -99,7 +100,7 @@ void NewtonInexato(FUNCTION *restrict func)
         }
     }
 
-        func->n_i->f_k = copyDoubleArray(ni->aprox_newtonI, func->n_i->it_num); // resultado do sistema
+    func->n_i->f_k = copyDoubleArray(ni->aprox_newtonI, func->n_i->it_num); // resultado do sistema
     _deleteNewtonI(ni);
     func->n_i->timeFull += timestamp();
 }

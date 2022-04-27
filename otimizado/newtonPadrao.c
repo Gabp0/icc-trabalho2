@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <matheval.h>
 #include <likwid.h>
 
 NEWTON_P *initNewtonP(FUNCTION *restrict func)
@@ -24,9 +23,9 @@ NEWTON_P *initNewtonP(FUNCTION *restrict func)
     new->X_i = copyDoubleArray(func->initial_aps, func->var_num);
     new->n = func->var_num;
     new->aprox_newtonP = malloc(sizeof(double) * pad(func->it_num + 1));
-    memset(new->aprox_newtonP, 0, func->it_num + 1);
     if (!new->aprox_newtonP)
         exitStatus(MEM_ALOC);
+    memset(new->aprox_newtonP, 0, func->it_num + 1);
 
     return new;
 }
@@ -50,8 +49,8 @@ void NewtonPadrao(FUNCTION *restrict func)
 
     NEWTON_P *np = initNewtonP(func);
 
-    func->n_p->timeDer -= timestamp();
-    func->n_p->timeDer += timestamp();
+    // func->n_p->timeDer -= timestamp();
+    // func->n_p->timeDer += timestamp();
 
     string_t markerHessiana = markerName("NewtonPadrao_Hessiana", func->var_num);
     string_t markerGradiente = markerName("NewtonPadrao_Gradiente", func->var_num);

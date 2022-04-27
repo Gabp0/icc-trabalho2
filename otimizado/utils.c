@@ -76,7 +76,7 @@ void prnVetorLongDouble(long double *v, int n)
 	printf("\n");
 }
 
-double *copyDoubleArray(double *a, int size)
+inline double *copyDoubleArray(double *a, int size)
 // aloca um array de double, copia o conteudo de _a_ e retorna o ponteiro
 {
 	double *new = malloc(sizeof(double) * pad(size));

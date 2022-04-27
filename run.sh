@@ -1,7 +1,7 @@
 #!/bin/bash
 #uso: ./run.sh {caminho para arquivo de entrada}
 
-METRICA="FLOPS_DP L3 L2CACHE ENERGY" 
+METRICA="FLOPS_DP L3 L2CACHE"
 CORE=3
 
 if [ -z "$1" ]

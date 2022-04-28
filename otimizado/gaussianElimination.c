@@ -82,28 +82,43 @@ void _pivot(LINEAR_SYST *restrict syst, int i)
 	}
 }
 
+#define NDSIMD 4
+
 void _retrossubs(LINEAR_SYST *restrict syst)
 // encontra os valores de X substituindo a partir da ultima linha do sl
 {
 	double x[4];
+	int j;
 
-	// unroll & jam do loop
-	for (int i = syst->size - 1; i >= 0; --i)
+	// loop original
+	// for (int i = syst->size - 1; i >= 0; --i)
+	// {
+	// 	syst->X[i] = syst->b[i];
+	// 	for (int j = i + 1; j < syst->size; j++)
+	// 		syst->X[i] -= syst->A[i][j] * syst->X[j];
+	// 	syst->X[i] /= syst->A[i][i];
+	// }
+
+	memcpy(syst->X, syst->b, sizeof(double) * syst->size);
+	for (int i = syst->size - 1; i >= 0; i--)
 	{
-		memset(x, 0, sizeof(double) * 4);
-		syst->X[i] = syst->b[i];
-		for (int j = i + 1; j < (syst->size - (syst->size % 4)); j++)
+		x[0] = 0.0;
+		x[1] = 0.0;
+		x[2] = 0.0;
+		x[3] = 0.0;
+
+		for (j = i + 1; j < (syst->size % NDSIMD); j++)
+			x[0] += syst->A[i][j] * syst->X[j];
+
+		for (; j < syst->size; j += NDSIMD) // unroll & jam do loop
 		{
 			x[0] += syst->A[i][j] * syst->X[j];
 			x[1] += syst->A[i][j + 1] * syst->X[j + 1];
 			x[2] += syst->A[i][j + 2] * syst->X[j + 2];
 			x[3] += syst->A[i][j + 3] * syst->X[j + 3];
 		}
-		// syst->X[i] -= x[0] + x[1] + x[2] + x[3];
-		//  for (int j = syst->size - (syst->size % 4); j < syst->size; j++)
-		//  	syst->X[i] -= syst->A[i][j] * syst->X[j];
-
-		// syst->X[i] /= syst->A[i][i];
+		syst->X[i] -= (x[0] + x[1] + x[2] + x[3]);
+		syst->X[i] /= syst->A[i][i];
 	}
 }
 
@@ -111,7 +126,6 @@ void _triang(LINEAR_SYST *restrict syst)
 // coloca o sistema na forma escada
 {
 	double m;
-	// int size_strd = syst->size - (syst->size % 4);
 
 	for (int i = 0; i < syst->size; ++i)
 	{

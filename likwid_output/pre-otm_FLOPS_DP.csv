@@ -1,0 +1,176 @@
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonPadrao_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],3.397028,
+call count,1,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,14011040000
+MAX_CPU_CLOCK,FIXC2,13222820000
+RETIRED_INSTRUCTIONS,PMC0,33418230000
+CPU_CLOCKS_UNHALTED,PMC1,13910880000
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,34077820000
+MERGE,PMC3,0
+TABLE,Region NewtonPadrao_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],3.3970,
+Runtime unhalted [s],3.5994,
+Clock [MHz],4124.6884,
+CPI,0.4163,
+DP [MFLOP/s],10031.6571,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonPadrao_Gradiente_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.000096,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,10617130
+MAX_CPU_CLOCK,FIXC2,10010210
+RETIRED_INSTRUCTIONS,PMC0,2030197
+CPU_CLOCKS_UNHALTED,PMC1,1386853
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,560949
+MERGE,PMC3,0
+TABLE,Region NewtonPadrao_Gradiente_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.0001,
+Runtime unhalted [s],0.0027,
+Clock [MHz],4128.6570,
+CPI,0.6831,
+DP [MFLOP/s],5851.1049,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonPadrao_Hessiana_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.127959,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,540641200
+MAX_CPU_CLOCK,FIXC2,510360500
+RETIRED_INSTRUCTIONS,PMC0,1581756000
+CPU_CLOCKS_UNHALTED,PMC1,525583400
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,357153
+MERGE,PMC3,0
+TABLE,Region NewtonPadrao_Hessiana_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.1280,
+Runtime unhalted [s],0.1389,
+Clock [MHz],4123.6039,
+CPI,0.3323,
+DP [MFLOP/s],2.7912,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonPadrao_SL_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],3.250114,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,13423160000
+MAX_CPU_CLOCK,FIXC2,12669070000
+RETIRED_INSTRUCTIONS,PMC0,31832860000
+CPU_CLOCKS_UNHALTED,PMC1,13379640000
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,34076440000
+MERGE,PMC3,0
+TABLE,Region NewtonPadrao_SL_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],3.2501,
+Runtime unhalted [s],3.4483,
+Clock [MHz],4124.3441,
+CPI,0.4203,
+DP [MFLOP/s],10484.6907,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonInexato_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],1.307868,
+call count,1,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,5437652000
+MAX_CPU_CLOCK,FIXC2,5090850000
+RETIRED_INSTRUCTIONS,PMC0,14287910000
+CPU_CLOCKS_UNHALTED,PMC1,5363743000
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,3165388000
+MERGE,PMC3,0
+TABLE,Region NewtonInexato_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],1.3079,
+Runtime unhalted [s],1.3969,
+Clock [MHz],4157.8227,
+CPI,0.3754,
+DP [MFLOP/s],2420.2657,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonInexato_Gradiente_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.000108,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,10704210
+MAX_CPU_CLOCK,FIXC2,9955335
+RETIRED_INSTRUCTIONS,PMC0,2037438
+CPU_CLOCKS_UNHALTED,PMC1,1414605
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,560949
+MERGE,PMC3,0
+TABLE,Region NewtonInexato_Gradiente_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.0001,
+Runtime unhalted [s],0.0027,
+Clock [MHz],4185.4639,
+CPI,0.6943,
+DP [MFLOP/s],5184.6686,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonInexato_Hessiana_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.126179,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,536702400
+MAX_CPU_CLOCK,FIXC2,502891900
+RETIRED_INSTRUCTIONS,PMC0,1581762000
+CPU_CLOCKS_UNHALTED,PMC1,524371000
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,357153
+MERGE,PMC3,0
+TABLE,Region NewtonInexato_Hessiana_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.1262,
+Runtime unhalted [s],0.1379,
+Clock [MHz],4154.3564,
+CPI,0.3315,
+DP [MFLOP/s],2.8305,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892645545 GHz,
+TABLE,Region NewtonInexato_SL_1000,Group 1 Raw,FLOPS_DP,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],1.164499,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,4857211000
+MAX_CPU_CLOCK,FIXC2,4547855000
+RETIRED_INSTRUCTIONS,PMC0,12702240000
+CPU_CLOCKS_UNHALTED,PMC1,4834124000
+RETIRED_SSE_AVX_FLOPS_ALL,PMC2,3164008000
+MERGE,PMC3,0
+TABLE,Region NewtonInexato_SL_1000,Group 1 Metric,FLOPS_DP,5
+Metric,HWThread 3,
+Runtime (RDTSC) [s],1.1645,
+Runtime unhalted [s],1.2478,
+Clock [MHz],4157.4326,
+CPI,0.3806,
+DP [MFLOP/s],2717.0551,

@@ -10,6 +10,8 @@
 #include <string.h>
 #include "gaussSeidel.h"
 
+#define NDSIMD 4
+
 LINEAR_SYST_GS *initLSGS(int size)
 // Aloca memoria para o sistema linear de tamanho size
 {
@@ -43,60 +45,50 @@ LINEAR_SYST_GS *initLSGS(int size)
 void gaussSeidel(LINEAR_SYST_GS *restrict syst)
 // resolve o sistema linear utilizando o metodo de Gauss-Seidel
 {
-    double so[4];
+    double so[NDSIMD];
     double soma;
     int i_m;
 
-    int k = 0;
-    do // numero de iteracoes
+    for (int k = 0; k < IT_MAX && (k == 0 || fabs(sq_norma(syst->X, syst->size) - sq_norma(syst->Xk_m1, syst->size)) > (TOL * TOL)); k++)// numero de iteracoes
     {
-
-        // for (int i = 0; i < syst->size; i++)
-        // {
-        //     i_m = i * syst->size;
-        //     soma = 0;
-        //     for (int j = 0; j < i; j++) // quebra do loop em dois eliminando o if
-        //         soma += syst->A[i_m + j] * syst->X[j];
-        //     for (int j = i + 1; j < syst->size; j++)
-        //         soma += syst->A[i_m + j] * syst->X[j];
-
-        //     syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]
-        //     syst->X[i] = (syst->b[i] - soma) / syst->A[i_m + i];
-        // }
-
         for (int i = 0; i < syst->size; i++)
         {
             i_m = i * syst->size;
             soma = 0.0;
-            for (int j = 0; j < (i - (i % 4)); j += 4) // quebra do loop em dois eliminando o if
-            {
-                so[0] = syst->A[i_m + j] * syst->X[j];
-                so[1] = syst->A[i_m + j + 1] * syst->X[j + 1];
-                so[2] = syst->A[i_m + j + 2] * syst->X[j + 2];
-                so[3] = syst->A[i_m + j + 3] * syst->X[j + 3];
+            so[0] = 0;
+            so[1] = 0;
+            so[2] = 0;
+            so[3] = 0;
+            int j;
 
-                soma += so[0] + so[1] + so[2] + so[3];
-            }
-            for (int j = (i - (i % 4)); j < i; j++) // residuo
+            for (j = 0; j < i % NDSIMD; j++) // residuo
                 soma += syst->A[i_m + j] * syst->X[j];
-            for (int j = i + 1; j < (syst->size - (syst->size % 4)); j += 4) // quebra do loop em dois eliminando o if
-            {
-                so[0] = syst->A[i_m + j] * syst->X[j];
-                so[1] = syst->A[i_m + j + 1] * syst->X[j + 1];
-                so[2] = syst->A[i_m + j + 2] * syst->X[j + 2];
-                so[3] = syst->A[i_m + j + 3] * syst->X[j + 3];
 
-                soma += so[0] + so[1] + so[2] + so[3];
+            for (; j < i; j += NDSIMD) // quebra do loop em dois eliminando o if
+            {
+                so[0] += syst->A[i_m + j] * syst->X[j];
+                so[1] += syst->A[i_m + j + 1] * syst->X[j + 1];
+                so[2] += syst->A[i_m + j + 2] * syst->X[j + 2];
+                so[3] += syst->A[i_m + j + 3] * syst->X[j + 3];
             }
-            for (int j = (syst->size - (syst->size % 4)); j < i; j++) // residuo
+
+            for (j = i + 1; j < i+1 + (syst->size -i - 1) % NDSIMD; j++) // residuo
                 soma += syst->A[i_m + j] * syst->X[j];
+
+            for (; j < syst->size; j += NDSIMD) // quebra do loop em dois eliminando o if
+            {
+                so[0] += syst->A[i_m + j] * syst->X[j];
+                so[1] += syst->A[i_m + j + 1] * syst->X[j + 1];
+                so[2] += syst->A[i_m + j + 2] * syst->X[j + 2];
+                so[3] += syst->A[i_m + j + 3] * syst->X[j + 3];
+            }
+                
+            soma += so[0] + so[1] + so[2] + so[3];
 
             syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]
             syst->X[i] = (syst->b[i] - soma) / syst->A[i_m + i];
         }
-
-        k++;
-    } while ((k < IT_MAX) && (fabs(sq_norma(syst->X, syst->size) - sq_norma(syst->Xk_m1, syst->size)) > (TOL * TOL)));
+    }
 
     return;
 }

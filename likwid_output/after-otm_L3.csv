@@ -1,0 +1,208 @@
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonPadrao_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],3.337957,
+call count,1,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,13781770000
+MAX_CPU_CLOCK,FIXC2,12992160000
+RETIRED_INSTRUCTIONS,PMC0,32782680000
+CPU_CLOCKS_UNHALTED,PMC1,13687270000
+L3_ACCESS,CPMC0,2890728000
+L3_MISS,CPMC1,63799990
+TABLE,Region NewtonPadrao_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],3.3380,
+Runtime unhalted [s],3.5405,
+Clock [MHz],4129.2233,
+CPI,0.4175,
+L3 access bandwidth [MBytes/s],55425.0974,
+L3 access data volume [GBytes],185.0066,
+L3 access rate [%],8.8179,
+L3 miss rate [%],0.1946,
+L3 miss ratio [%],2.2071,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonPadrao_Gradiente_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.000128,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,10533660
+MAX_CPU_CLOCK,FIXC2,9877842
+RETIRED_INSTRUCTIONS,PMC0,2081301
+CPU_CLOCKS_UNHALTED,PMC1,1447170
+L3_ACCESS,CPMC0,112489
+L3_MISS,CPMC1,24111
+TABLE,Region NewtonPadrao_Gradiente_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.0001,
+Runtime unhalted [s],0.0027,
+Clock [MHz],4151.0881,
+CPI,0.6953,
+L3 access bandwidth [MBytes/s],56363.1709,
+L3 access data volume [GBytes],0.0072,
+L3 access rate [%],5.4047,
+L3 miss rate [%],1.1585,
+L3 miss ratio [%],21.4341,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonPadrao_Hessiana_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.115616,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,489659700
+MAX_CPU_CLOCK,FIXC2,461150900
+RETIRED_INSTRUCTIONS,PMC0,1581707000
+CPU_CLOCKS_UNHALTED,PMC1,473175400
+L3_ACCESS,CPMC0,10470140
+L3_MISS,CPMC1,1526446
+TABLE,Region NewtonPadrao_Hessiana_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.1156,
+Runtime unhalted [s],0.1258,
+Clock [MHz],4133.2915,
+CPI,0.2992,
+L3 access bandwidth [MBytes/s],5795.8101,
+L3 access data volume [GBytes],0.6701,
+L3 access rate [%],0.6620,
+L3 miss rate [%],0.0965,
+L3 miss ratio [%],14.5790,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonPadrao_SL_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],3.204846,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,13247730000
+MAX_CPU_CLOCK,FIXC2,12490280000
+RETIRED_INSTRUCTIONS,PMC0,31197680000
+CPU_CLOCKS_UNHALTED,PMC1,13209080000
+L3_ACCESS,CPMC0,2879708000
+L3_MISS,CPMC1,62151590
+TABLE,Region NewtonPadrao_SL_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],3.2048,
+Runtime unhalted [s],3.4033,
+Clock [MHz],4128.7066,
+CPI,0.4234,
+L3 access bandwidth [MBytes/s],57507.0727,
+L3 access data volume [GBytes],184.3013,
+L3 access rate [%],9.2305,
+L3 miss rate [%],0.1992,
+L3 miss ratio [%],2.1583,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonInexato_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.649904,
+call count,1,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,2688014000
+MAX_CPU_CLOCK,FIXC2,2529749000
+RETIRED_INSTRUCTIONS,PMC0,6285938000
+CPU_CLOCKS_UNHALTED,PMC1,2617438000
+L3_ACCESS,CPMC0,349886800
+L3_MISS,CPMC1,5503523
+TABLE,Region NewtonInexato_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.6499,
+Runtime unhalted [s],0.6905,
+Clock [MHz],4136.1742,
+CPI,0.4164,
+L3 access bandwidth [MBytes/s],34455.4655,
+L3 access data volume [GBytes],22.3928,
+L3 access rate [%],5.5662,
+L3 miss rate [%],0.0876,
+L3 miss ratio [%],1.5729,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonInexato_Gradiente_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.000111,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,10477910
+MAX_CPU_CLOCK,FIXC2,9820863
+RETIRED_INSTRUCTIONS,PMC0,2132855
+CPU_CLOCKS_UNHALTED,PMC1,1376772
+L3_ACCESS,CPMC0,72943
+L3_MISS,CPMC1,12015
+TABLE,Region NewtonInexato_Gradiente_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.0001,
+Runtime unhalted [s],0.0027,
+Clock [MHz],4153.0747,
+CPI,0.6455,
+L3 access bandwidth [MBytes/s],42118.4298,
+L3 access data volume [GBytes],0.0047,
+L3 access rate [%],3.4200,
+L3 miss rate [%],0.5633,
+L3 miss ratio [%],16.4718,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonInexato_Hessiana_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.130894,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,552130300
+MAX_CPU_CLOCK,FIXC2,520169200
+RETIRED_INSTRUCTIONS,PMC0,1581503000
+CPU_CLOCKS_UNHALTED,PMC1,535319900
+L3_ACCESS,CPMC0,9212333
+L3_MISS,CPMC1,720294
+TABLE,Region NewtonInexato_Hessiana_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.1309,
+Runtime unhalted [s],0.1418,
+Clock [MHz],4131.8227,
+CPI,0.3385,
+L3 access bandwidth [MBytes/s],4504.3231,
+L3 access data volume [GBytes],0.5896,
+L3 access rate [%],0.5825,
+L3 miss rate [%],0.0455,
+L3 miss ratio [%],7.8188,
+STRUCT,Info,3
+CPU name:,AMD Ryzen 7 3800X 8-Core Processor             ,
+CPU type:,AMD K17 (Zen2) architecture,
+CPU clock:,3.892644371 GHz,
+TABLE,Region NewtonInexato_SL_1000,Group 1 Raw,L3,6
+Region Info,HWThread 3,
+RDTSC Runtime [s],0.503200,
+call count,51,
+Event,Counter,HWThread 3
+ACTUAL_CPU_CLOCK,FIXC1,2094149000
+MAX_CPU_CLOCK,FIXC2,1970918000
+RETIRED_INSTRUCTIONS,PMC0,4701069000
+CPU_CLOCKS_UNHALTED,PMC1,2077568000
+L3_ACCESS,CPMC0,340356700
+L3_MISS,CPMC1,4740623
+TABLE,Region NewtonInexato_SL_1000,Group 1 Metric,L3,9
+Metric,HWThread 3,
+Runtime (RDTSC) [s],0.5032,
+Runtime unhalted [s],0.5380,
+Clock [MHz],4136.0307,
+CPI,0.4419,
+L3 access bandwidth [MBytes/s],43288.5761,
+L3 access data volume [GBytes],21.7828,
+L3 access rate [%],7.2400,
+L3 miss rate [%],0.1008,
+L3 miss ratio [%],1.3928,

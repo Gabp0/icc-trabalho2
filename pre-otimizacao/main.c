@@ -5,7 +5,6 @@
 
 #include "functions.h"
 #include "newtonPadrao.h"
-#include "newtonModificado.h"
 #include "newtonInexato.h"
 #include "utils.h"
 #include <stdio.h>
@@ -17,21 +16,21 @@ int main(int argc, char **argv)
 
     char *output = getArgs(argc, argv); // argumentos pela linha de comando
     FUNCTION *input_func;
-    
+
     LIKWID_MARKER_INIT;
-    
+
     do
     {
         input_func = readFunction(); // le a funcao
 
-        string_t markerNewtonPadrao = markerName("NewtonPadrao",input_func->var_num);
-        string_t markerNewtonInexato = markerName("NewtonInexato",input_func->var_num);
-        
+        string_t markerNewtonPadrao = markerName("NewtonPadrao", input_func->var_num);
+        string_t markerNewtonInexato = markerName("NewtonInexato", input_func->var_num);
+
         // metodos de resolucao de sistema linear
         LIKWID_MARKER_START(markerNewtonPadrao);
         NewtonPadrao(input_func);
         LIKWID_MARKER_STOP(markerNewtonPadrao);
-        //NewtonModificado(input_func);
+
         LIKWID_MARKER_START(markerNewtonInexato);
         NewtonInexato(input_func);
         LIKWID_MARKER_STOP(markerNewtonInexato);
@@ -42,6 +41,6 @@ int main(int argc, char **argv)
     } while (getc(stdin) != EOF);
 
     LIKWID_MARKER_CLOSE;
-    
+
     return EXIT_SUCCESS;
 }

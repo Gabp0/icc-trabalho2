@@ -67,7 +67,7 @@ void NewtonPadrao(FUNCTION *restrict func)
 
         func->n_p->it_num++; // numero de iteracoes utilizadas no metodo
 
-        if (norma(np->syst->b, func->var_num) < func->t_ep) // testa || gradiente de f(X_i) || < eps
+        if (sq_norma(np->syst->b, func->var_num) < (func->t_ep * func->t_ep)) // testa || gradiente de f(X_i) || < eps
             break;
 
         LIKWID_MARKER_START(markerHessiana);
@@ -85,7 +85,7 @@ void NewtonPadrao(FUNCTION *restrict func)
         for (int i = 0; i < func->var_num; i++)
             np->X_i[i] += np->syst->X[i]; // calcula X_i+1
 
-        if (norma(np->X_i, func->var_num) < __DBL_EPSILON__) // testa || delta_i || < eps2
+        if (sq_norma(np->X_i, func->var_num) < (__DBL_EPSILON__ * __DBL_EPSILON__)) // testa || delta_i || < eps2
         {
             func->n_p->it_num++;
             break;

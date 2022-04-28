@@ -121,7 +121,7 @@ inline int max(int a, int b, int c)
 	return aux > c ? aux : c;
 }
 
-inline double norma(double *array, int size)
+inline double sq_norma(double *array, int size)
 // norma euclidiana do vetor
 {
 	double soma = 0;

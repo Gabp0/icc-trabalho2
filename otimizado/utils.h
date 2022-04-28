@@ -39,7 +39,7 @@ double *copyDoubleArray(double *a, int size); // copia array de double _a_ e ret
 int max(int a, int b, int c);                 // retorna o maior de tres inteiros
 char *getArgs(int argc, char **argv);         // separa os argumentos da linha de comando. retorna null caso nao haja arquivo de saida
 void exitStatus(int code);                    // encerra o programa com status de saida diferente de 0
-double norma(double *array, int size);        // retorna norma euclidiana do vetor _array_ de tamanho _size_
+double sq_norma(double *array, int size);     // retorna o quadrado norma euclidiana do vetor _array_ de tamanho _size_
 int isValidNum(double num);                   // testa se o numero nao e "nan" e nem "inf"
 int pad(int n);                               // se n e potencia de 2, retorna n + 1; usado para evitar cache trashing
 

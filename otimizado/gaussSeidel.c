@@ -43,8 +43,8 @@ LINEAR_SYST_GS *initLSGS(int size)
 void gaussSeidel(LINEAR_SYST_GS *restrict syst)
 // resolve o sistema linear utilizando o metodo de Gauss-Seidel
 {
-    double so[4], soma;
-    int size_m = syst->size - (syst->size % 4);
+    double so[4];
+    double soma;
     int i_m;
 
     int k = 0;
@@ -64,31 +64,31 @@ void gaussSeidel(LINEAR_SYST_GS *restrict syst)
         //     syst->X[i] = (syst->b[i] - soma) / syst->A[i_m + i];
         // }
 
-        for (int i = 0; i < size_m; i += 4)
+        for (int i = 0; i < syst->size; i++)
         {
-            i_m = (i * syst->size);
+            i_m = i * syst->size;
             soma = 0.0;
-            for (int j = 0; j < (i - (i % 4)); j++) // quebra do loop em dois eliminando o if
+            for (int j = 0; j < (i - (i % 4)); j += 4) // quebra do loop em dois eliminando o if
             {
-                so[0] = syst->A[(i * syst->size) + j] * syst->X[j];
-                so[1] = syst->A[(i * syst->size) + j] * syst->X[j + 1];
-                so[2] = syst->A[(i * syst->size) + j] * syst->X[j + 2];
-                so[3] = syst->A[(i * syst->size) + j] * syst->X[j + 3];
+                so[0] = syst->A[i_m + j] * syst->X[j];
+                so[1] = syst->A[i_m + j + 1] * syst->X[j + 1];
+                so[2] = syst->A[i_m + j + 2] * syst->X[j + 2];
+                so[3] = syst->A[i_m + j + 3] * syst->X[j + 3];
 
                 soma += so[0] + so[1] + so[2] + so[3];
             }
-            for (int j = (i - (i % 4)); j < i; j++)
+            for (int j = (i - (i % 4)); j < i; j++) // residuo
                 soma += syst->A[i_m + j] * syst->X[j];
-            for (int j = 0; j < (syst->size - (syst->size % 4)); j++) // quebra do loop em dois eliminando o if
+            for (int j = i + 1; j < (syst->size - (syst->size % 4)); j += 4) // quebra do loop em dois eliminando o if
             {
-                so[0] = syst->A[(i * syst->size) + j] * syst->X[j];
-                so[1] = syst->A[(i * syst->size) + j] * syst->X[j + 1];
-                so[2] = syst->A[(i * syst->size) + j] * syst->X[j + 2];
-                so[3] = syst->A[(i * syst->size) + j] * syst->X[j + 3];
+                so[0] = syst->A[i_m + j] * syst->X[j];
+                so[1] = syst->A[i_m + j + 1] * syst->X[j + 1];
+                so[2] = syst->A[i_m + j + 2] * syst->X[j + 2];
+                so[3] = syst->A[i_m + j + 3] * syst->X[j + 3];
 
                 soma += so[0] + so[1] + so[2] + so[3];
             }
-            for (int j = (syst->size - (syst->size % 4)); j < i; j++)
+            for (int j = (syst->size - (syst->size % 4)); j < i; j++) // residuo
                 soma += syst->A[i_m + j] * syst->X[j];
 
             syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]
@@ -96,7 +96,7 @@ void gaussSeidel(LINEAR_SYST_GS *restrict syst)
         }
 
         k++;
-    } while ((k < IT_MAX) && (fabs(norma(syst->X, syst->size) - norma(syst->Xk_m1, syst->size)) > TOL));
+    } while ((k < IT_MAX) && (fabs(sq_norma(syst->X, syst->size) - sq_norma(syst->Xk_m1, syst->size)) > (TOL * TOL)));
 
     return;
 }

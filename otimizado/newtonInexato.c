@@ -68,7 +68,7 @@ void NewtonInexato(FUNCTION *restrict func)
 
         func->n_i->it_num++; // numero de iteracoes utilizadas no metodo
 
-        if (norma(ni->syst->b, func->var_num) < func->t_ep) // testa || gradiente de f(X_i) || < eps
+        if (sq_norma(ni->syst->b, func->var_num) < (func->t_ep * func->t_ep)) // testa || gradiente de f(X_i) || < eps
             break;
 
         int i_m;
@@ -93,7 +93,7 @@ void NewtonInexato(FUNCTION *restrict func)
         for (int i = 0; i < func->var_num; i++)
             ni->X_i[i] += ni->syst->X[i]; // calcula X_i+1
 
-        if (norma(ni->X_i, func->var_num) < __DBL_EPSILON__) // testa || delta_i || < eps2
+        if (sq_norma(ni->X_i, func->var_num) < (__DBL_EPSILON__ * __DBL_EPSILON__)) // testa || delta_i || < eps2
         {
             func->n_i->it_num++;
             break;

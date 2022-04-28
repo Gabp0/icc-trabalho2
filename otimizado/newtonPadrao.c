@@ -61,8 +61,10 @@ void NewtonPadrao(FUNCTION *restrict func)
         np->aprox_newtonP[k] = rosenbrock(np->X_i, func->var_num); // f(X_i)
 
         LIKWID_MARKER_START(markerGradiente);
+
         for (int i = 0; i < func->var_num; i++)                             // gradiente f(X_i)
             np->syst->b[i] = rosenbrock_dx(i, np->X_i, func->var_num) * -1; // oposto resultado do gradiente para o calculo do sistema linear
+
         LIKWID_MARKER_STOP(markerGradiente);
 
         func->n_p->it_num++; // numero de iteracoes utilizadas no metodo
@@ -71,14 +73,18 @@ void NewtonPadrao(FUNCTION *restrict func)
             break;
 
         LIKWID_MARKER_START(markerHessiana);
+
         for (int i = 0; i < func->var_num; i++)
             for (int j = 0; j < func->var_num; j++) // calcula a hessiana de X_i
                 np->syst->A[i][j] = rosenbrock_dxdy(i, j, np->X_i, func->var_num);
+
         LIKWID_MARKER_STOP(markerHessiana);
 
         func->n_p->timeSL -= timestamp();
         LIKWID_MARKER_START(markerSL);
-        gaussianElimination(np->syst); // resolve o sistema linear utilizando a eliminacao de guass
+
+        gaussianElimination(np->syst); // resolve o sistema linear utilizando a eliminacao de gauss
+
         LIKWID_MARKER_STOP(markerSL);
         func->n_p->timeSL += timestamp();
 

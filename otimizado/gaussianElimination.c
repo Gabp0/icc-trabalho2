@@ -5,6 +5,7 @@
 #include "gaussianElimination.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 #include "utils.h"
 
@@ -84,43 +85,26 @@ void _pivot(LINEAR_SYST *restrict syst, int i)
 void _retrossubs(LINEAR_SYST *restrict syst)
 // encontra os valores de X substituindo a partir da ultima linha do sl
 {
+	double x[4];
+
 	// unroll & jam do loop
 	for (int i = syst->size - 1; i >= 0; --i)
 	{
+		memset(x, 0, sizeof(double) * 4);
 		syst->X[i] = syst->b[i];
-		for (int j = i + 1; j < syst->size; j++)
-			syst->X[i] -= syst->A[i][j] * syst->X[j];
-		syst->X[i] /= syst->A[i][i];
+		for (int j = i + 1; j < (syst->size - (syst->size % 4)); j++)
+		{
+			x[0] += syst->A[i][j] * syst->X[j];
+			x[1] += syst->A[i][j + 1] * syst->X[j + 1];
+			x[2] += syst->A[i][j + 2] * syst->X[j + 2];
+			x[3] += syst->A[i][j + 3] * syst->X[j + 3];
+		}
+		// syst->X[i] -= x[0] + x[1] + x[2] + x[3];
+		//  for (int j = syst->size - (syst->size % 4); j < syst->size; j++)
+		//  	syst->X[i] -= syst->A[i][j] * syst->X[j];
+
+		// syst->X[i] /= syst->A[i][i];
 	}
-
-	// int size_strd = (syst->size - (syst->size % 4));
-
-	// for (int i = (syst->size - 1); i > size_strd - 1; --i) // residuo
-	// {
-	// 	syst->X[i] = syst->b[i];
-	// 	for (int j = i + 1; j < syst->size; j++)
-	// 		syst->X[i] -= syst->A[i][j] * syst->X[j];
-	// 	syst->X[i] /= syst->A[i][i];
-	// }
-
-	// for (int i = size_strd - 1; i >= 0; i -= 4) // unroll e jam com 4 de stride
-	// {
-	// 	syst->X[i] = syst->b[i];
-	// 	syst->X[i - 1] = syst->b[i - 1];
-	// 	syst->X[i - 2] = syst->b[i - 2];
-	// 	syst->X[i - 3] = syst->b[i - 3];
-	// 	for (int j = i + 1; j < syst->size; j++)
-	// 	{
-	// 		syst->X[i] -= syst->A[i][j] * syst->X[j];
-	// 		syst->X[i - 1] -= syst->A[i - 1][j] * syst->X[j];
-	// 		syst->X[i - 2] -= syst->A[i - 2][j] * syst->X[j];
-	// 		syst->X[i - 3] -= syst->A[i - 3][j] * syst->X[j];
-	// 	}
-	// 	syst->X[i] /= syst->A[i][i];
-	// 	syst->X[i - 1] /= syst->A[i - 1][i - 1];
-	// 	syst->X[i - 2] /= syst->A[i - 2][i - 2];
-	// 	syst->X[i - 3] /= syst->A[i - 3][i - 3];
-	// }
 }
 
 void _triang(LINEAR_SYST *restrict syst)
@@ -143,48 +127,6 @@ void _triang(LINEAR_SYST *restrict syst)
 
 			syst->b[k] -= syst->b[i] * m;
 		}
-
-		// for (int k = i + 1; k < size_strd - 1; k += 4)
-		// {
-		// 	// printf("ok\n");
-
-		// 	m[0] = syst->A[k][i] / syst->A[i][i];
-		// 	syst->A[k][i] = 0.0;
-		// 	m[1] = syst->A[k + 1][i] / syst->A[i][i];
-		// 	syst->A[k + 1][i] = 0.0;
-		// 	m[2] = syst->A[k + 2][i] / syst->A[i][i];
-		// 	syst->A[k + 2][i] = 0.0;
-		// 	// printf("aqui %d \n", k);
-		// 	m[3] = syst->A[k + 3][i] / syst->A[i][i];
-		// 	syst->A[k + 3][i] = 0.0;
-
-		// 	// printf("%d %d\n", k, i);
-
-		// 	for (int j = i + 1; j < syst->size; ++j)
-		// 	{
-		// 		syst->A[k][j] -= syst->A[i][j] * m[0];
-		// 		syst->A[k + 1][j] -= syst->A[i][j] * m[1];
-		// 		syst->A[k + 2][j] -= syst->A[i][j] * m[2];
-		// 		syst->A[k + 3][j] -= syst->A[i][j] * m[3];
-		// 	}
-
-		// 	syst->b[k] -= syst->b[i] * m[0];
-		// 	syst->b[k + 1] -= syst->b[i] * m[1];
-		// 	syst->b[k + 2] -= syst->b[i] * m[2];
-		// 	syst->b[k + 3] -= syst->b[i] * m[3];
-		// }
-
-		// for (int k = max(i + 1, size_strd - 1, 0); k < syst->size; k += 1) // residuo
-		// {
-
-		// 	m[0] = syst->A[k][i] / syst->A[i][i];
-		// 	syst->A[k][i] = 0.0;
-
-		// 	for (int j = i + 1; j < syst->size; ++j)
-		// 		syst->A[k][j] -= syst->A[i][j] * m[0];
-
-		// 	syst->b[k] -= syst->b[i] * m[0];
-		// }
 	}
 }
 

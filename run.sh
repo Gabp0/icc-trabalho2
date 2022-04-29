@@ -33,34 +33,6 @@ done
 
 # filtro inicial
 
-# egrep "Group 1 Raw|RDTSC Runtime|DP|AVX DP" likwid_output/pre-otm_FLOPS_DP.csv > likwid_output/pre-otm_FLOPS_DP.csv.tmp
-# rm likwid_output/pre-otm_FLOPS_DP.csv
-# mv likwid_output/pre-otm_FLOPS_DP.csv.tmp likwid_output/pre-otm_FLOPS_DP.csv
-
-# egrep "Group 1 Raw|RDTSC Runtime|DP|AVX DP" likwid_output/after-otm_FLOPS_DP.csv > likwid_output/after-otm_FLOPS_DP.csv.tmp
-# rm likwid_output/after-otm_FLOPS_DP.csv
-# mv likwid_output/after-otm_FLOPS_DP.csv.tmp likwid_output/after-otm_FLOPS_DP.csv
-
-
-
-# egrep "Group 1 Raw|L2 miss ratio" likwid_output/pre-otm_L2CACHE.csv > likwid_output/pre-otm_L2CACHE.csv.tmp
-# rm likwid_output/pre-otm_L2CACHE.csv
-# mv likwid_output/pre-otm_L2CACHE.csv.tmp likwid_output/pre-otm_L2CACHE.csv
-
-# egrep "Group 1 Raw|L2 miss ratio" likwid_output/after-otm_L2CACHE.csv > likwid_output/after-otm_L2CACHE.csv.tmp
-# rm likwid_output/after-otm_L2CACHE.csv
-# mv likwid_output/after-otm_L2CACHE.csv.tmp likwid_output/after-otm_L2CACHE.csv
-
-
-
-# egrep "Group 1 Raw|L3 bandwidth [MBytes/s]" likwid_output/pre-otm_L3.csv > likwid_output/pre-otm_L3.csv.tmp
-# rm likwid_output/pre-otm_L3.csv
-# mv likwid_output/pre-otm_L3.csv.tmp likwid_output/pre-otm_L3.csv
-
-# egrep "Group 1 Raw|L3 bandwidth [MBytes/s]" likwid_output/after-otm_L3.csv > likwid_output/after-otm_L3.csv.tmp
-# rm likwid_output/after-otm_L3.csv
-# mv likwid_output/after-otm_L3.csv.tmp likwid_output/after-otm_L3.csv
-
 OTIMIZACOES="pre-otm after-otm"
 
 for otm in ${OTIMIZACOES}
@@ -72,3 +44,9 @@ do
     egrep "Group 1 Raw|RDTSC Runtime|L3 bandwidth" likwid_output/${otm}_L3.csv >> likwid_output/filtered-${otm}.csv
     printf '\n' >> likwid_output/filtered-${otm}.csv
 done
+
+# gera os graficos
+
+#python3 plot_graph.py
+
+#shutdown now

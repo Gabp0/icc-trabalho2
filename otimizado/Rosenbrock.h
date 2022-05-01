@@ -1,3 +1,8 @@
+// Gabriel de Oliveira Pontarolo GRR20203895
+// Rodrigo Saviam Soffner GRR20205092
+// Biblioteca Rosenbrock.h
+// Biblioteca para implementacao da funcao de Rosenbrock
+
 #ifndef __ROSENBROCK__
 #define __ROSENBROCK__
 

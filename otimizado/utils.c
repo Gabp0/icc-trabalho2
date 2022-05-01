@@ -76,7 +76,7 @@ void prnVetorLongDouble(long double *v, int n)
 	printf("\n");
 }
 
-inline double *copyDoubleArray(double *a, int size)
+double *copyDoubleArray(double *a, int size)
 // aloca um array de double, copia o conteudo de _a_ e retorna o ponteiro
 {
 	double *new = malloc(sizeof(double) * pad(size));
@@ -85,15 +85,6 @@ inline double *copyDoubleArray(double *a, int size)
 	memcpy(new, a, sizeof(double) * size);
 
 	return new;
-}
-
-inline int pad(int n)
-// se n e potencia de 2, retorna n + 1
-// usado para evitar cache trashing
-{
-	if (isPot2(n))
-		return n + 1;
-	return n;
 }
 
 char *getArgs(int argc, char **argv)
@@ -114,14 +105,14 @@ char *getArgs(int argc, char **argv)
 	return NULL;
 }
 
-inline int max(int a, int b, int c)
+int max(int a, int b, int c)
 // maximo entre tres int
 {
 	int aux = a > b ? a : b;
 	return aux > c ? aux : c;
 }
 
-inline double sq_norma(double *array, int size)
+double sq_norma(double *array, int size)
 // norma euclidiana do vetor
 {
 	double soma = 0;
@@ -130,7 +121,7 @@ inline double sq_norma(double *array, int size)
 	return sqrt(soma);
 }
 
-inline int isValidNum(double num)
+int isValidNum(double num)
 // testa se o numero nao é nan ou inf
 {
 	return !(isnan(num) || isinf(num));
@@ -145,8 +136,17 @@ string_t markerName(string_t baseName, int n)
 	return mark;
 }
 
-inline int isPot2(int n)
+int isPot2(int n)
 {
 	int k;
 	return (k = log2(n)) == log2(n);
+}
+
+int pad(int n)
+// se n e potencia de 2, retorna n + 1
+// usado para evitar cache trashing
+{
+	if (isPot2(n))
+		return n + 1;
+	return n;
 }

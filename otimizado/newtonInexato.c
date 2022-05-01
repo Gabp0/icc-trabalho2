@@ -44,18 +44,10 @@ void _deleteNewtonI(NEWTON_I *restrict ni)
 void NewtonInexato(FUNCTION *restrict func)
 // encontra as raizes da funcao utilizando o metodo de newton inexato
 {
-    func->n_i->timeFull -= timestamp();
-
     NEWTON_I *ni = _initNewtonI(func);
-
-    func->n_i->timeDer -= timestamp();
-    // Gradiente(func, ni->gradiente);              // gera as funcoes do vetor gradiente
-    // Hessiana(func, ni->gradiente, ni->hessiana); // gera as funcoes da matriz hessiana
-    func->n_i->timeDer += timestamp();
-
-    string_t markerHessiana = markerName("NewtonInexato_Hessiana", func->var_num);
-    string_t markerGradiente = markerName("NewtonInexato_Gradiente", func->var_num);
-    string_t markerSL = markerName("NewtonInexato_SL", func->var_num);
+    string_t markerHessiana = markerName("Newton Inexato - Hessiana", func->var_num);
+    string_t markerGradiente = markerName("Newton Inexato - Gradiente", func->var_num);
+    string_t markerSL = markerName("Newton Inexato - Sistema Linear", func->var_num);
 
     for (int k = 0; k <= func->it_num; k++) // testa numero de iteracoes
     {
@@ -84,14 +76,24 @@ void NewtonInexato(FUNCTION *restrict func)
         for (int i = 0; i < func->var_num; i++)
             ni->syst->X[i] = 0;
 
-        func->n_i->timeSL -= timestamp();
         LIKWID_MARKER_START(markerSL);
         gaussSeidel(ni->syst); // resolve o sistema linear utilizando gauss-seidel
         LIKWID_MARKER_STOP(markerSL);
-        func->n_i->timeSL += timestamp();
 
-        for (int i = 0; i < func->var_num; i++)
-            ni->X_i[i] += ni->syst->X[i]; // calcula X_i+1
+        double x[4];
+        for (int i = 0; i < func->var_num % 4; i++)
+            ni->X_i[i] += ni->syst->X[i];
+        for (int i = func->var_num % 4; i < func->var_num; i += 4) // vetorizacao do loop
+        {
+            x[0] = ni->X_i[i] + ni->syst->X[i]; // calcula X_i+1
+            x[1] = ni->X_i[i + 1] + ni->syst->X[i + 1];
+            x[2] = ni->X_i[i + 2] + ni->syst->X[i + 2];
+            x[3] = ni->X_i[i + 3] + ni->syst->X[i + 3];
+            ni->X_i[i] = x[0];
+            ni->X_i[i + 1] = x[1];
+            ni->X_i[i + 2] = x[2];
+            ni->X_i[i + 3] = x[3];
+        }
 
         if (sq_norma(ni->X_i, func->var_num) < (__DBL_EPSILON__ * __DBL_EPSILON__)) // testa || delta_i || < eps2
         {
@@ -102,5 +104,4 @@ void NewtonInexato(FUNCTION *restrict func)
 
     func->n_i->f_k = copyDoubleArray(ni->aprox_newtonI, func->n_i->it_num); // resultado do sistema
     _deleteNewtonI(ni);
-    func->n_i->timeFull += timestamp();
 }

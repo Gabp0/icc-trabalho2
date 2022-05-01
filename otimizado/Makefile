@@ -4,7 +4,7 @@
 # Makefile
 
 CC = gcc
-CFLAGS = --std=c99 -Wall -O3 -mavx -march=native -fopt-info-vec-all
+CFLAGS = --std=c99 -Wall -O3 -mavx -march=native -fstrict-aliasing #-fopt-info-vec-all 
 
 LIKWID = /usr/bin/likwid
 LIKWID_FLAGS = -I$(LIKWID)/include -DLIKWID_PERFMON

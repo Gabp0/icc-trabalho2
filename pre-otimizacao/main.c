@@ -1,4 +1,4 @@
-// Introdução a Computação Científica - Trabalho 1
+// Introdução a Computação Científica - Trabalho 2 - Nao otimizado
 // Gabriel de Oliveira Pontarolo GRR20203895
 // Rodrigo Saviam Soffner GRR20205092
 // Programa principal
@@ -23,8 +23,8 @@ int main(int argc, char **argv)
     {
         input_func = readFunction(); // le a funcao
 
-        string_t markerNewtonPadrao = markerName("NewtonPadrao", input_func->var_num);
-        string_t markerNewtonInexato = markerName("NewtonInexato", input_func->var_num);
+        string_t markerNewtonPadrao = markerName("Newton Padrao", input_func->var_num);
+        string_t markerNewtonInexato = markerName("Newton Inexato", input_func->var_num);
 
         // metodos de resolucao de sistema linear
         LIKWID_MARKER_START(markerNewtonPadrao);

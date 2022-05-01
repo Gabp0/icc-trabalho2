@@ -44,16 +44,10 @@ void _deleteNewtonP(NEWTON_P *np)
 void NewtonPadrao(FUNCTION *func)
 // encontra as raizes da funcao _func_ utilizando o metodo de newton padrao
 {
-    func->n_p->timeFull -= timestamp();
-
     NEWTON_P *np = initNewtonP(func);
-
-    func->n_p->timeDer -= timestamp();
-    func->n_p->timeDer += timestamp();
-
-    string_t markerHessiana = markerName("NewtonPadrao_Hessiana", func->var_num);
-    string_t markerGradiente = markerName("NewtonPadrao_Gradiente", func->var_num);
-    string_t markerSL = markerName("NewtonPadrao_SL", func->var_num);
+    string_t markerHessiana = markerName("Newton Padrao - Hessiana", func->var_num);
+    string_t markerGradiente = markerName("Newton Padrao - Gradiente", func->var_num);
+    string_t markerSL = markerName("Newton Padrao - Sistema Linear", func->var_num);
 
     for (int k = 0; k <= func->it_num; k++) // testa numero de iteracoes
     {
@@ -75,11 +69,9 @@ void NewtonPadrao(FUNCTION *func)
                 np->syst->A[i][j] = rosenbrock_dxdy(i, j, np->X_i, func->var_num);
         LIKWID_MARKER_STOP(markerHessiana);
 
-        func->n_p->timeSL -= timestamp();
         LIKWID_MARKER_START(markerSL);
         gaussianElimination(np->syst); // resolve o sistema linear utilizando a eliminacao de guass
         LIKWID_MARKER_STOP(markerSL);
-        func->n_p->timeSL += timestamp();
 
         for (int i = 0; i < func->var_num; i++)
             np->X_i[i] += np->syst->X[i]; // calcula X_i+1
@@ -93,5 +85,4 @@ void NewtonPadrao(FUNCTION *func)
 
     func->n_p->f_k = copyDoubleArray(np->aprox_newtonP, func->n_p->it_num); // resultados do sistema linear
     _deleteNewtonP(np);
-    func->n_p->timeFull += timestamp();
 }

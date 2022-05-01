@@ -42,18 +42,10 @@ void _deleteNewtonI(NEWTON_I *ni)
 void NewtonInexato(FUNCTION *func)
 // encontra as raizes da funcao utilizando o metodo de newton inexato
 {
-    func->n_i->timeFull -= timestamp();
-
     NEWTON_I *ni = _initNewtonI(func);
-
-    func->n_i->timeDer -= timestamp();
-    // Gradiente(func, ni->gradiente);              // gera as funcoes do vetor gradiente
-    // Hessiana(func, ni->gradiente, ni->hessiana); // gera as funcoes da matriz hessiana
-    func->n_i->timeDer += timestamp();
-
-    string_t markerHessiana = markerName("NewtonInexato_Hessiana", func->var_num);
-    string_t markerGradiente = markerName("NewtonInexato_Gradiente", func->var_num);
-    string_t markerSL = markerName("NewtonInexato_SL", func->var_num);
+    string_t markerHessiana = markerName("Newton Inexato - Hessiana", func->var_num);
+    string_t markerGradiente = markerName("Newton Inexato - Gradiente", func->var_num);
+    string_t markerSL = markerName("Newton Inexato - Sistema Linear", func->var_num);
 
     for (int k = 0; k <= func->it_num; k++) // testa numero de iteracoes
     {
@@ -78,11 +70,9 @@ void NewtonInexato(FUNCTION *func)
         for (int i = 0; i < func->var_num; i++)
             ni->syst->X[i] = 0;
 
-        func->n_i->timeSL -= timestamp();
         LIKWID_MARKER_START(markerSL);
         gaussSeidel(ni->syst); // resolve o sistema linear utilizando gauss-seidel
         LIKWID_MARKER_STOP(markerSL);
-        func->n_i->timeSL += timestamp();
 
         for (int i = 0; i < func->var_num; i++)
             ni->X_i[i] += ni->syst->X[i]; // calcula X_i+1
@@ -96,5 +86,4 @@ void NewtonInexato(FUNCTION *func)
 
     func->n_i->f_k = copyDoubleArray(ni->aprox_newtonI, func->n_i->it_num); // resultado do sistema
     _deleteNewtonI(ni);
-    func->n_i->timeFull += timestamp();
 }

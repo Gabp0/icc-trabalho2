@@ -22,7 +22,7 @@ LINEAR_SYST_GS *initLSGS(int size)
     new->size = size;
     int p_size = pad(size); // padding no tamanho para evitar cache trashing
 
-    new->A = malloc(sizeof(double) * p_size * p_size);
+    new->A = malloc(sizeof(double) * size * p_size);
     if (!new->A)
         exitStatus(MEM_ALOC);
 
@@ -49,7 +49,7 @@ void gaussSeidel(LINEAR_SYST_GS *restrict syst)
     double soma;
     int i_m;
 
-    for (int k = 0; k < IT_MAX && (k == 0 || fabs(sq_norma(syst->X, syst->size) - sq_norma(syst->Xk_m1, syst->size)) > (TOL * TOL)); k++)// numero de iteracoes
+    for (int k = 0; k < IT_MAX && (k == 0 || fabs(sq_norma(syst->X, syst->size) - sq_norma(syst->Xk_m1, syst->size)) > (TOL * TOL)); k++) // numero de iteracoes
     {
         for (int i = 0; i < syst->size; i++)
         {
@@ -64,25 +64,25 @@ void gaussSeidel(LINEAR_SYST_GS *restrict syst)
             for (j = 0; j < i % NDSIMD; j++) // residuo
                 soma += syst->A[i_m + j] * syst->X[j];
 
-            for (; j < i; j += NDSIMD) // quebra do loop em dois eliminando o if
+            for (; j < i; j += NDSIMD) // vetorizacao
             {
                 so[0] += syst->A[i_m + j] * syst->X[j];
                 so[1] += syst->A[i_m + j + 1] * syst->X[j + 1];
                 so[2] += syst->A[i_m + j + 2] * syst->X[j + 2];
                 so[3] += syst->A[i_m + j + 3] * syst->X[j + 3];
             }
-
-            for (j = i + 1; j < i+1 + (syst->size -i - 1) % NDSIMD; j++) // residuo
+            // quebra do loop em dois eliminando o if
+            for (j = i + 1; j < i + 1 + (syst->size - i - 1) % NDSIMD; j++) // residuo
                 soma += syst->A[i_m + j] * syst->X[j];
 
-            for (; j < syst->size; j += NDSIMD) // quebra do loop em dois eliminando o if
+            for (; j < syst->size; j += NDSIMD) // vetorizacao
             {
                 so[0] += syst->A[i_m + j] * syst->X[j];
                 so[1] += syst->A[i_m + j + 1] * syst->X[j + 1];
                 so[2] += syst->A[i_m + j + 2] * syst->X[j + 2];
                 so[3] += syst->A[i_m + j + 3] * syst->X[j + 3];
             }
-                
+
             soma += so[0] + so[1] + so[2] + so[3];
 
             syst->Xk_m1[i] = syst->X[i]; // guarda x[k - 1]

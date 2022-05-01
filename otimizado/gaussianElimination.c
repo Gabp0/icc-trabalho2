@@ -22,7 +22,7 @@ LINEAR_SYST *initLS(int size)
 	new->A = malloc(p_size * sizeof(double *));
 	if (!new->A)
 		exitStatus(MEM_ALOC);
-	new->A[0] = malloc(p_size * p_size * sizeof(double)); // aloca um vetor com todos os elementos da matriz
+	new->A[0] = malloc(p_size * size * sizeof(double)); // aloca um vetor com todos os elementos da matriz
 	if (!new->A[0])
 		exitStatus(MEM_ALOC);
 	for (int i = 1; i < size; i++) // ajusta os demais ponteiros de linhas (i > 0)
@@ -90,27 +90,18 @@ void _retrossubs(LINEAR_SYST *restrict syst)
 	double x[4];
 	int j;
 
-	// loop original
-	// for (int i = syst->size - 1; i >= 0; --i)
-	// {
-	// 	syst->X[i] = syst->b[i];
-	// 	for (int j = i + 1; j < syst->size; j++)
-	// 		syst->X[i] -= syst->A[i][j] * syst->X[j];
-	// 	syst->X[i] /= syst->A[i][i];
-	// }
-
 	memcpy(syst->X, syst->b, sizeof(double) * syst->size);
 	for (int i = syst->size - 1; i >= 0; i--)
 	{
-		x[0] = 0.0;
+		x[0] = 0.0; // vetorizacao
 		x[1] = 0.0;
 		x[2] = 0.0;
 		x[3] = 0.0;
 
-		for (j = i + 1; j < (syst->size % NDSIMD); j++)
+		for (j = i + 1; j < (syst->size % NDSIMD); j++) // residuo
 			x[0] += syst->A[i][j] * syst->X[j];
 
-		for (; j < syst->size; j += NDSIMD) // unroll & jam do loop
+		for (; j < syst->size; j += NDSIMD) // vetorizacao do loop
 		{
 			x[0] += syst->A[i][j] * syst->X[j];
 			x[1] += syst->A[i][j + 1] * syst->X[j + 1];

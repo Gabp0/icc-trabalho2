@@ -23,8 +23,8 @@ int main(int argc, char **argv)
     {
         input_func = readFunction(); // le a funcao
 
-        string_t markerNewtonPadrao = markerName("NewtonPadrao", input_func->var_num);
-        string_t markerNewtonInexato = markerName("NewtonInexato", input_func->var_num);
+        string_t markerNewtonPadrao = markerName("Newton Padrao", input_func->var_num);
+        string_t markerNewtonInexato = markerName("Newton Inexato", input_func->var_num);
 
         // metodos de encontrar as raizes da funcao
         LIKWID_MARKER_START(markerNewtonPadrao);
